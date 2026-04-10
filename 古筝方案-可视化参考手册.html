@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古筝方案 - 可视化参考手册</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", sans-serif;
+            background: #1a1a2e;
+            color: #fff;
+            line-height: 1.8;
+        }
+        .section {
+            padding: 60px 40px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+        }
+        h1 {
+            text-align: center;
+            font-size: 3em;
+            background: linear-gradient(90deg, #d4af37, #f4e4ba, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .subtitle { text-align: center; color: #888; margin-bottom: 50px; }
+        
+        .scheme {
+            background: rgba(255,255,255,0.05);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 40px;
+            border: 2px solid;
+        }
+        .scheme-a { border-color: #4a7c59; }
+        .scheme-b { border-color: #ffb6c1; }
+        .scheme-c { border-color: #40e0d0; }
+        .scheme-d { border-color: #fff; }
+        
+        .scheme-title {
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .scheme-a .scheme-title { color: #d4af37; }
+        .scheme-b .scheme-title { color: #ffb6c1; }
+        .scheme-c .scheme-title { color: #40e0d0; }
+        .scheme-d .scheme-title { color: #fff; }
+        
+        .tag {
+            background: rgba(212, 175, 55, 0.3);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.5em;
+            color: #d4af37;
+        }
+        
+        .color-palette {
+            display: flex;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .color-box {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            font-weight: bold;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+        }
+        
+        .storyboard {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .scene {
+            background: rgba(0,0,0,0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px dashed rgba(255,255,255,0.2);
+        }
+        .scene-num {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .scheme-a .scene-num { background: #4a7c59; }
+        .scheme-b .scene-num { background: #ffb6c1; color: #333; }
+        .scheme-c .scene-num { background: #40e0d0; color: #333; }
+        .scheme-d .scene-num { background: #fff; color: #333; }
+        
+        .scene-desc {
+            font-size: 0.85em;
+            color: #aaa;
+        }
+        .scene-prompt {
+            font-size: 0.75em;
+            color: #666;
+            margin-top: 10px;
+            font-style: italic;
+        }
+        
+        .tips {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 0 10px 10px 0;
+        }
+        .tips h3 { color: #d4af37; margin-bottom: 10px; }
+        .tips ul { padding-left: 20px; color: #aaa; }
+        
+        @media print {
+            body { background: #fff; color: #000; }
+            .section { border-bottom: 1px solid #ccc; }
+        }
+    </style>
+</head>
+<body>
+    <div class="section">
+        <h1>🎵 古筝·智绘非遗</h1>
+        <p class="subtitle">小学组 AI·智绘非遗 | 可视化参考手册 | 打印版</p>
+    </div>
+    
+    <!-- 方案A -->
+    <div class="section scheme scheme-a">
+        <h2 class="scheme-title">
+            方案A：木与弦的传承
+            <span class="tag">经典叙事</span>
+        </h2>
+        <p style="color: #aaa; margin-bottom: 20px;"><strong>核心概念：</strong>一把古筝从深山桐木到女儿指尖的完整旅程，双线叙事</p>
+        <p><strong>风格：</strong>工笔+现代插画 | <strong>适合：</strong>最稳妥不出错</p>
+        
+        <h3 style="color: #d4af37; margin: 20px 0;">🎨 色调参考</h3>
+        <div class="color-palette">
+            <div class="color-box" style="background: #2d5016;">墨绿</div>
+            <div class="color-box" style="background: #4a7c59;">青绿</div>
+            <div class="color-box" style="background: #d4af37;">金黄</div>
+            <div class="color-box" style="background: #f4e4ba; color: #333;">暖黄</div>
+        </div>
+        <h3 style="color: #d4af37; margin: 30px 0;">🎬 8张分镜脚本</h3>
+        <div class="storyboard">
+            <div class="scene">
+                <div class="scene-num">1</div>
+                <div class="scene-desc">深山老林，老匠人抚摸百年泡桐木</div>
+                <div class="scene-prompt">晨光、雾气、皱纹手</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">2</div>
+                <div class="scene-desc">刨木做面板，木屑飞扬</div>
+                <div class="scene-prompt">专注眼神、金色木屑</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">3</div>
+                <div class="scene-desc">琴弦绷紧，手指勒出红痕</div>
+                <div class="scene-prompt">张力、黑白+红</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">4</div>
+                <div class="scene-desc">古筝静置于暗室，月光洒下</div>
+                <div class="scene-prompt">靛蓝+银白、静谧</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">5</div>
+                <div class="scene-desc">女儿初见古筝，眼睛发光</div>
+                <div class="scene-prompt">暖黄柔光、纯真</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">6</div>
+                <div class="scene-desc">两双手重叠，跨越时空</div>
+                <div class="scene-prompt">双重曝光、暖金</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">7</div>
+                <div class="scene-desc">舞台聚光灯下演奏</div>
+                <div class="scene-prompt">朱红+金、背影</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">8</div>
+                <div class="scene-desc">老匠人望向女儿，时空交错</div>
+                <div class="scene-prompt">暖色柔光、情感高潮</div>
+            </div>
+        </div>
+        
+        <div class="tips">
+            <h3>💡 拼接建议</h3>
+            <ul>
+                <li>8张图拼成横长卷，从右到左流动</li>
+                <li>色调从冷（墨绿）到暖（金黄）渐变</li>
+                <li>像古代画卷的浏览体验</li>
+            </ul>
+        </div>
+    </div>
+    
+    <!-- 方案B -->
+    <div class="section scheme scheme-b">
+        <h2 class="scheme-title">
+            方案B：琴语
+            <span class="tag">童趣视角</span>
+        </h2>
+        <p style="color: #aaa; margin-bottom: 20px;"><strong>核心概念：</strong>古筝是"会说话的伙伴"，8个日常故事</p>
+        <p><strong>风格：</strong>绘本插画 | <strong>适合：</strong>小学组最讨喜</p>
+        
+        <h3 style="color: #ffb6c1; margin: 20px 0;">🎨 色调参考</h3>
+        <div class="color-palette">
+            <div class="color-box" style="background: #ffb6c1; color: #333;">粉红</div>
+            <div class="color-box" style="background: #ffd700; color: #333;">金黄</div>
+            <div class="color-box" style="background: #ffe4e1; color: #333;">浅粉</div>
+            <div class="color-box" style="background: #fff8dc; color: #333;">米色</div>
+        </div>
+        
+        <h3 style="color: #ffb6c1; margin: 30px 0;">🎬 8张分镜脚本</h3>
+        <div class="storyboard">
+            <div class="scene">
+                <div class="scene-num">1</div>
+                <div class="scene-desc">古筝像沉睡的公主在角落</div>
+                <div class="scene-prompt">拟人化、童话感</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">2</div>
+                <div class="scene-desc">第一个音符像"你好"气泡</div>
+                <div class="scene-prompt">发光音符、魔法</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">3</div>
+                <div class="scene-desc">女儿对古筝说悄悄话</div>
+                <div class="scene-prompt">秘密分享、琴弦颤动</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">4</div>
+                <div class="scene-desc">写作业时古筝轻轻哼唱</div>
+                <div class="scene-prompt">音符飘浮、陪伴</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">5</div>
+                <div class="scene-desc">弹不好哭了，琴弦静静等</div>
+                <div class="scene-prompt">共情、安慰</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">6</div>
+                <div class="scene-desc">弹对音，琴弦跳起舞</div>
+                <div class="scene-prompt">庆祝、动态线条</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">7</div>
+                <div class="scene-desc">上台前说"我们一起"</div>
+                <div class="scene-prompt">决心、红幕</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">8</div>
+                <div class="scene-desc">舞台中央一起发光</div>
+                <div class="scene-prompt">胜利、金色光晕</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 方案C -->
+    <div class="section scheme scheme-c">
+        <h2 class="scheme-title">
+            方案C：千年一声
+            <span class="tag">历史穿越</span>
+        </h2>
+        <p style="color: #aaa; margin-bottom: 20px;"><strong>核心概念：</strong>穿越秦汉唐宋明清，看见古筝历史</p>
+        <p><strong>风格：</strong>国风青绿山水 | <strong>适合：</strong>文化底蕴，评委喜欢</p>
+        
+        <h3 style="color: #40e0d0; margin: 20px 0;">🎨 色调参考</h3>
+        <div class="color-palette">
+            <div class="color-box" style="background: #2f4f4f;">深青</div>
+            <div class="color-box" style="background: #40e0d0; color: #333;"> turquoise</div>
+            <div class="color-box" style="background: #d4af37;">金色</div>
+            <div class="color-box" style="background: #f0e68c; color: #333;">浅金</div>
+        </div>
+        
+        <h3 style="color: #40e0d0; margin: 30px 0;">🎬 8张分镜脚本</h3>
+        <div class="storyboard">
+            <div class="scene">
+                <div class="scene-num">1</div>
+                <div class="scene-desc">现代家中练琴，夕阳西下</div>
+                <div class="scene-prompt">暖光、现代</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">2</div>
+                <div class="scene-desc">琴弦泛金光，时空扭曲</div>
+                <div class="scene-prompt">穿越特效、光轨</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">3</div>
+                <div class="scene-desc">秦汉宫廷，最早的"瑟"</div>
+                <div class="scene-prompt">古宫殿、青绿金</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">4</div>
+                <div class="scene-desc">唐宋仕女庭院弹筝</div>
+                <div class="scene-prompt">诗词环绕、蝶舞</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">5</div>
+                <div class="scene-desc">明清街头艺人卖艺</div>
+                <div class="scene-prompt">市井、暖土色</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">6</div>
+                <div class="scene-desc">民国旗袍女子+留声机</div>
+                <div class="scene-prompt">海派、怀旧</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">7</div>
+                <div class="scene-desc">从幻境醒来，更珍惜</div>
+                <div class="scene-prompt">领悟、古今融合</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">8</div>
+                <div class="scene-desc">千年来所有手一起拨弦</div>
+                <div class="scene-prompt">时空重叠、金光</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- 方案D -->
+    <div class="section scheme scheme-d">
+        <h2 class="scheme-title">
+            方案D：手的对话
+            <span class="tag" style="background: rgba(255,255,255,0.2);">极简主义</span>
+        </h2>
+        <p style="color: #aaa; margin-bottom: 20px;"><strong>核心概念：</strong>只拍"手"的特写，3代人与古筝的连接</p>
+        <p><strong>风格：</strong>极简摄影风 | <strong>适合：</strong>最高级，考验执行</p>
+        
+        <h3 style="color: #fff; margin: 20px 0;">🎨 色调参考</h3>
+        <div class="color-palette">
+            <div class="color-box" style="background: #000; border: 1px solid #333;">纯黑</div>
+            <div class="color-box" style="background: #333;">深灰</div>
+            <div class="color-box" style="background: #d4af37;">金色点缀</div>
+            <div class="color-box" style="background: #fff; color: #333;">纯白</div>
+        </div>
+        
+        <h3 style="color: #fff; margin: 30px 0;">🎬 8张分镜脚本</h3>
+        <div class="storyboard">
+            <div class="scene">
+                <div class="scene-num">1</div>
+                <div class="scene-desc">老茧手选材</div>
+                <div class="scene-prompt">黑白+棕</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">2</div>
+                <div class="scene-desc">刨木，木屑嵌指甲</div>
+                <div class="scene-prompt">细节、坚持</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">3</div>
+                <div class="scene-desc">上弦，勒出血痕</div>
+                <div class="scene-prompt">黑白+红</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">4</div>
+                <div class="scene-desc">母亲年轻时学琴</div>
+                <div class="scene-prompt">旧照片、棕褐</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">5</div>
+                <div class="scene-desc">母亲指导女儿</div>
+                <div class="scene-prompt">暖金、传承</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">6</div>
+                <div class="scene-desc">女儿第一次触碰</div>
+                <div class="scene-prompt">粉白、小心</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">7</div>
+                <div class="scene-desc">女儿熟练弹奏</div>
+                <div class="scene-prompt">黑白+金弦</div>
+            </div>
+            <div class="scene">
+                <div class="scene-num">8</div>
+                <div class="scene-desc">三代手叠在一起</div>
+                <div class="scene-prompt">逆光剪影、终极</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section" style="text-align: center;">
+        <p style="color: #666;">🎨 完整提示词请访问：javanlee996.github.io/guzheng-site</p>
+        <p style="color: #666; margin-top: 10px;">打印此手册，和女儿一起讨论选择！</p>
+    </div>
+</body>
+</html>

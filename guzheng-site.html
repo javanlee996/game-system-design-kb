@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>古筝·智绘非遗 | 方案选品站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+            padding: 20px;
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 2px solid rgba(212, 175, 55, 0.3);
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            background: linear-gradient(90deg, #d4af37, #f4e4ba, #d4af37);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+        .header .subtitle { color: #aaa; font-size: 1.1em; }
+        .status-bar {
+            background: rgba(212, 175, 55, 0.1);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .status-item { text-align: center; }
+        .status-item .number { font-size: 2em; color: #d4af37; font-weight: bold; }
+        .status-item .label { color: #888; font-size: 0.9em; }
+        .daily-update {
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(139, 69, 19, 0.2));
+            border: 2px solid #d4af37;
+            border-radius: 16px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .daily-update h2 {
+            color: #d4af37;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .update-date {
+            background: #d4af37;
+            color: #1a1a2e;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8em;
+            font-weight: bold;
+        }
+        .scheme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .scheme-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .scheme-card:hover {
+            transform: translateY(-5px);
+            border-color: #d4af37;
+            box-shadow: 0 10px 40px rgba(212, 175, 55, 0.2);
+        }
+        .scheme-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #d4af37, #8b4513);
+        }
+        .scheme-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        .scheme-title { font-size: 1.3em; color: #f4e4ba; margin-bottom: 5px; }
+        .scheme-tag {
+            background: rgba(212, 175, 55, 0.2);
+            color: #d4af37;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+        }
+        .scheme-theme {
+            color: #888;
+            font-size: 0.95em;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .scheme-preview {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .preview-title {
+            color: #d4af37;
+            font-size: 0.85em;
+            margin-bottom: 10px;
+        }
+        .preview-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        .preview-thumb {
+            aspect-ratio: 4/3;
+            background: linear-gradient(135deg, #2a2a4a, #1a1a2e);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            color: #666;
+            border: 1px dashed rgba(212, 175, 55, 0.3);
+        }
+        .scheme-actions { display: flex; gap: 10px; }
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9em;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #d4af37, #b8941d);
+            color: #1a1a2e;
+            font-weight: bold;
+        }
+        .btn-primary:hover { background: linear-gradient(135deg, #e4c04a, #c8a42a); transform: scale(1.02); }
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .btn-secondary:hover { background: rgba(255, 255, 255, 0.15); }
+        .scheme-card.selected {
+            border-color: #4CAF50;
+            background: rgba(76, 175, 80, 0.1);
+        }
+        .scheme-card.selected::before { background: linear-gradient(90deg, #4CAF50, #45a049); }
+        .selected-badge {
+            position: absolute;
+            top: 15px; right: 15px;
+            background: #4CAF50;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+        }
+        .archive-section { margin-top: 40px; }
+        .archive-section h2 {
+            color: #888;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .tips-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid #d4af37;
+            padding: 20px;
+            border-radius: 0 12px 12px 0;
+            margin-top: 30px;
+        }
+        .tips-box h3 { color: #d4af37; margin-bottom: 10px; }
+        .tips-box ul { color: #aaa; padding-left: 20px; line-height: 1.8; }
+        .tips-box li { margin-bottom: 5px; }
+        .footer {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .prompt-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            padding: 40px;
+            overflow-y: auto;
+        }
+        .prompt-modal.active { display: block; }
+        .modal-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: #1a1a2e;
+            border-radius: 16px;
+            padding: 30px;
+            border: 1px solid #d4af37;
+        }
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .modal-header h2 { color: #d4af37; }
+        .close-btn {
+            background: none;
+            border: none;
+            color: #888;
+            font-size: 1.5em;
+            cursor: pointer;
+        }
+        .close-btn:hover { color: #fff; }
+        .prompt-text {
+            background: rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            font-family: monospace;
+            color: #4CAF50;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            margin-bottom: 20px;
+            overflow-x: auto;
+            max-height: 60vh;
+            overflow-y: auto;
+        }
+        .copy-btn {
+            background: #d4af37;
+            color: #1a1a2e;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .copy-btn:hover { background: #e4c04a; }
+        @media (max-width: 768px) {
+            .scheme-grid { grid-template-columns: 1fr; }
+            .header h1 { font-size: 1.8em; }
+            .preview-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🎵 古筝·智绘非遗</h1>
+        <p class="subtitle">小学组 AI·智绘非遗 | 方案选品站</p>
+    </div>
+    
+    <div class="status-bar">
+        <div class="status-item">
+            <div class="number" id="scheme-count">4</div>
+            <div class="label">总方案数</div>
+        </div>
+        <div class="status-item">
+            <div class="number">Day 1</div>
+            <div class="label">更新进度</div>
+        </div>
+        <div class="status-item">
+            <div class="number">?</div>
+            <div class="label">当前选中</div>
+        </div>
+        <div class="status-item">
+            <div class="number">✨ 更新中</div>
+            <div class="label">状态</div>
+        </div>
+    </div>
+    
+    <div class="daily-update">
+        <h2>
+            📅 今日更新
+            <span class="update-date">2026-04-03</span>
+        </h2>
+        <p style="color: #888; margin-bottom: 20px;">
+            <strong style="color: #d4af37;">传承与连接</strong> —— 4套不同情感基调的方案，点击"查看提示词"获取完整分镜脚本
+        </p>
+        
+        <div class="scheme-grid" id="today-schemes"></div>
+    </div>
+    
+    <div class="archive-section">
+        <h2>📚 历史方案库</h2>
+        <div class="scheme-grid" id="archive-schemes">
+            <p style="color: #666; text-align: center; padding: 40px;">暂无历史方案，明日更新后将归档至此</p>
+        </div>
+    </div>
+    
+    <div class="tips-box">
+        <h3>💡 使用指南</h3>
+        <ul>
+            <li><strong>每日更新：</strong>每天上架 3-5 套新方案，不同风格、不同叙事角度</li>
+            <li><strong>查看提示词：</strong>点击按钮获取完整 8 张分镜的 AI 提示词，复制到即梦/可灵/Midjourney 生成图片</li>
+            <li><strong>标记候选：</strong>看到喜欢的方案可以记在心里，最终选一个最喜欢的参赛</li>
+            <li><strong>女儿参与：</strong>让女儿一起看，听听她喜欢哪个故事</li>
+            <li><strong>定制需求：</strong>如果想要特定风格（如"更童趣"、"更古典水墨"），直接告诉我</li>
+        </ul>
+    </div>
+    
+    <div class="footer">
+        <p>🎨 非遗智绘方案站 | 每日更新直到满意为止</p>
+        <p style="font-size: 0.9em; margin-top: 10px;">最后更新：2026-04-03</p>
+    </div>
+    
+    <div class="prompt-modal" id="prompt-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">方案详情</h2>
+                <button class="close-btn" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modal-body"></div>
+            <button class="copy-btn" onclick="copyPrompt()">📋 复制全部提示词</button>
+        </div>
+    </div>
+    
+    <script>
+        const todaySchemes = [
+            {
+                id: 'day1-1',
+                title: '方案A：木与弦的传承',
+                tag: '经典叙事',
+                theme: '一把古筝从深山桐木到女儿指尖的完整旅程，双线叙事：匠人的手（过去）→ 女儿的手（未来）',
+                style: '工笔+现代插画',
+                color: '墨绿→金黄',
+                selected: false,
+                fullContent: `【方案A：木与弦的传承】
+
+【8张分镜脚本】
+
+1️⃣ 深山老林，老匠人抚摸百年泡桐木
+提示词：An old craftsman's wrinkled hands touching ancient paulownia wood in deep mountain forest, moss on bark, morning mist, Chinese traditional ink wash painting style, soft lighting, 8k quality
+
+2️⃣ 刨木做面板，木屑飞扬
+提示词：Close-up of craftsman's focused eyes while planing wood, wood chips flying like golden snowflakes, workshop background, warm brown tones, detailed texture
+
+3️⃣ 琴弦一根根绷紧，手指被勒出红痕
+提示词：Tensioned guzheng strings pressing against fingers leaving red marks, dramatic lighting, pain and persistence, close-up of hands, black and white with red accent
+
+4️⃣ 完成的古筝静置于暗室，月光洒下
+提示词：A finished guzheng resting in dark room under moonlight, glossy surface reflecting silver light, serene atmosphere, indigo blue and silver white tones
+
+5️⃣ 女儿第一次见到古筝，眼睛里的光
+提示词：Young girl's eyes lighting up when seeing guzheng for first time, warm afternoon sunlight, innocence and wonder, soft focus, golden hour lighting
+
+6️⃣ 指尖拨弦特写，与老匠人的手重叠
+提示词：Overlapping image: old craftsman's rough hands and young girl's delicate fingers both plucking strings, golden hour lighting, double exposure effect, warmth and connection
+
+7️⃣ 舞台聚光灯下演奏
+提示词：Back view of girl playing guzheng on stage under spotlight, flowing dress, vibrating strings visible, dramatic red and gold, cinematic composition
+
+8️⃣ 老匠人望向远方，前景是女儿弹琴
+提示词：Old craftsman smiling gently looking into distance, translucent overlay of girl playing guzheng in foreground, warm sunset colors, timeless connection, emotional ending
+
+【风格统一词】（每张都要加）
+Chinese traditional ink wash painting style mixed with modern illustration, detailed hand texture, warm emotion, cinematic composition, high detail, 8k quality, consistent character design
+
+【拼接建议】
+8张图拼成横长卷，像古代画卷一样从右到左流动，色调从冷（墨绿）到暖（金黄）渐变。`
+            },
+            {
+                id: 'day1-2',
+                title: '方案B：琴语',
+                tag: '童趣视角',
+                theme: '完全从女儿视角出发，古筝不是乐器而是"会说话的伙伴"，8张图是8个与"琴朋友"的日常故事',
+                style: '绘本插画',
+                color: '粉彩+暖黄',
+                selected: false,
+                fullContent: `【方案B：琴语】
+
+【8张分镜脚本 - 童趣绘本风】
+
+1️⃣ 初见：古筝在琴房角落，像一位沉睡的公主
+提示词：A guzheng standing in the corner of a music room, personified as a sleeping princess, children's book illustration style, soft pastel colors, magical atmosphere, warm lighting
+
+2️⃣ 相识：女儿轻轻触摸琴弦，琴弦发出第一个音符，像在说"你好"
+提示词：Little girl's finger gently touching guzheng strings, first musical note floating in air as a glowing "hello" bubble, whimsical illustration style, pink and yellow tones, magical realism
+
+3️⃣ 秘密：女儿对古筝说悄悄话，琴弦微微颤动回应
+提示词：Young girl whispering secrets to her guzheng, strings vibrating gently in response, cozy room setting, storybook illustration style, warm emotional connection
+
+4️⃣ 陪伴：写作业时古筝在旁边，琴弦轻轻哼唱
+提示词：Girl doing homework with guzheng beside her, strings humming a gentle melody represented by musical notes floating around, peaceful afternoon, soft lighting, picture book style
+
+5️⃣ 挫折：弹不好哭了，琴弦静静等待，不催促
+提示词：Girl crying after failed practice, guzheng strings standing still and patient, empathetic illustration, emotional support theme, soft blue and pink tones
+
+6️⃣ 突破：突然弹对了一个音，琴弦跳起舞来
+提示词：Girl playing a perfect note suddenly, guzheng strings dancing joyfully represented by animated lines, celebration moment, bright warm colors, dynamic composition
+
+7️⃣ 演出：上台前，女儿对古筝说"我们一起"
+提示词：Girl backstage holding guzheng's hand (metaphorically), saying "let's do this together", determined expression, warm encouragement, illustration style, red and gold stage curtains
+
+8️⃣ 绽放：舞台中央，女儿和古筝一起发光
+提示词：Girl and guzheng together on stage center, both glowing with golden light, triumphant moment, sparkles and musical notes floating around, children's book happy ending, warm sunset colors
+
+【风格统一词】
+Children's picture book illustration style, whimsical and warm, soft pastel colors with golden accents, emotional storytelling, detailed character expressions, consistent young girl character design, magical realism elements, 8k quality
+
+【特别说明】
+这个方案重点突出"童趣"和"拟人化"，适合小学组。每张图都可以配一句简短的文字，像绘本一样。`
+            },
+            {
+                id: 'day1-3',
+                title: '方案C：千年一声',
+                tag: '历史穿越',
+                theme: '女儿弹琴时"穿越"到不同朝代，看见古筝在各个时代的模样：秦汉、唐宋、明清、现代',
+                style: '国风+穿越感',
+                color: '青绿山水',
+                selected: false,
+                fullContent: `【方案C：千年一声】
+
+【8张分镜脚本 - 历史穿越风】
+
+1️⃣ 现代：女儿在家中练琴，窗外夕阳西下
+提示词：Modern girl practicing guzheng at home, sunset through window, contemporary setting, golden hour lighting, peaceful atmosphere, realistic illustration style
+
+2️⃣ 穿越开始：琴弦泛起金光，时空扭曲
+提示词：Guzheng strings glowing golden light, time and space beginning to warp, magical transition effect, sparks and light trails, mystical atmosphere
+
+3️⃣ 秦汉：看见最早的"瑟"，宫廷乐师演奏
+提示词：Ancient Qin Dynasty palace, earliest form of guzheng (se), court musician playing, traditional Chinese palace architecture, historical accuracy, elegant green and gold tones
+
+4️⃣ 唐宋：仕女在庭院中弹筝，诗词环绕
+提示词：Tang Dynasty garden scene, elegant lady playing guzheng, poetry characters floating around like butterflies, blooming flowers, classical Chinese painting style, soft green and pink
+
+5️⃣ 明清：民间艺人街头卖艺，古筝融入市井
+提示词：Ming Qing Dynasty street scene, folk artist playing guzheng for passersby, traditional market atmosphere, detailed architecture, warm earth tones, lively illustration
+
+6️⃣ 民国：旗袍女子在留声机旁弹新曲
+提示词：Republican era Shanghai, lady in qipao playing guzheng next to phonograph, blend of tradition and modernity, art deco elements, nostalgic sepia and jade green tones
+
+7️⃣ 回归：女儿从幻境中醒来，更加珍惜手中琴
+提示词：Girl returning from time travel vision, opening eyes with deeper understanding, holding guzheng with reverence, mix of historical and modern elements in background, emotional realization
+
+8️⃣ 融合：古今重叠，千年来所有弹琴人的手一起拨弦
+提示词：All hands from different dynasties overlapping and playing guzheng strings together across time, ultimate unity and inheritance theme, golden light connecting all eras, powerful composition, emotional climax
+
+【风格统一词】
+Chinese historical painting style with modern digital art techniques, consistent jade green and gold color palette, flowing brushstrokes, cultural depth, detailed period costumes and settings, ethereal lighting, 8k quality
+
+【穿越感营造】
+第2张和第7张用"时空隧道"特效，其他6张保持各朝代特色但色调统一（青绿山水+金色点缀）。`
+            },
+            {
+                id: 'day1-4',
+                title: '方案D：手的对话',
+                tag: '极简主义',
+                theme: '只拍"手"的特写：匠人的手、母亲的手、女儿的手，3代人与古筝的连接，极简但有力量',
+                style: '极简艺术',
+                color: '黑白+单色',
+                selected: false,
+                fullContent: `【方案D：手的对话】
+
+【8张分镜脚本 - 极简主义】
+
+⚠️ 特别说明：这个方案非常极简，每张图只聚焦"手"和"琴弦"，但情感张力极强
+
+1️⃣ 匠人之手：布满老茧的手，正在选材
+提示词：Extreme close-up of craftsman's weathered hands full of calluses, selecting paulownia wood, black and white photography style with warm brown accent on wood texture, dramatic side lighting, high contrast
+
+2️⃣ 匠人之手：刨木的手，木屑嵌入指甲缝
+提示词：Close-up of hands planing wood, wood chips embedded in fingernails, dedication and hardship, monochrome with golden wood tones, shallow depth of field, artistic photography style
+
+3️⃣ 匠人之手：上弦的手，勒出的血痕
+提示词：Hands stringing guzheng, blood marks from tight strings, sacrifice and craftsmanship, black and white with red accent on wounds, dramatic lighting, emotional intensity
+
+4️⃣ 母亲之手：年轻时学琴的手（旧照片感）
+提示词：Young mother's hands learning guzheng, vintage photograph style, sepia tones, nostalgic atmosphere, soft focus edges, memory and inheritance theme
+
+5️⃣ 母亲之手：现在轻轻指导女儿的手
+提示词：Mother's hand gently guiding daughter's hand on guzheng strings, two generations connecting, warm golden lighting, soft focus, tender moment, beige and gold tones
+
+6️⃣ 女儿之手：第一次触碰琴弦，小心翼翼
+提示词：Little girl's hand touching guzheng strings for first time, delicate and careful, innocent exploration, soft pink and white tones, high key lighting, gentle composition
+
+7️⃣ 女儿之手：熟练弹奏，指尖起舞
+提示词：Girl's hands skillfully playing guzheng, fingers dancing on strings, confidence and mastery, dramatic lighting, motion blur on moving fingers, black and white with golden string highlights
+
+8️⃣ 三代之手：叠在一起，同时拨响一根弦
+提示词：Three generations of hands overlapping together on guzheng strings, playing one note simultaneously, ultimate unity, warm golden backlighting creating silhouette effect, powerful emotional ending, timeless connection
+
+【风格统一词】
+Fine art photography style, extreme close-up composition, high contrast black and white with selective color accents, focus on texture and emotion, shallow depth of field, cinematic lighting, museum-quality artistic presentation, 8k detail
+
+【极简说明】
+- 全程不出现完整人物，只有手
+- 背景极简甚至纯色
+- 靠光影和手的姿态讲故事
+- 非常考验摄影/绘画功底，但做出来很高级`
+            }
+        ];
+        
+        function renderTodaySchemes() {
+            const container = document.getElementById('today-schemes');
+            container.innerHTML = todaySchemes.map(scheme => `
+                <div class="scheme-card ${scheme.selected ? 'selected' : ''}" data-id="${scheme.id}">
+                    ${scheme.selected ? '<span class="selected-badge">⭐ 已选</span>' : ''}
+                    <div class="scheme-header">
+                        <div>
+                            <h3 class="scheme-title">${scheme.title}</h3>
+                            <span class="scheme-tag">${scheme.tag}</span>
+                        </div>
+                    </div>
+                    <p class="scheme-theme">${scheme.theme}</p>
+                    <div class="scheme-preview">
+                        <div class="preview-title">🎨 8张分镜预览</div>
+                        <div class="preview-grid">
+                            ${Array(8).fill(0).map((_, i) => `<div class="preview-thumb">图${i+1}</div>`).join('')}
+                        </div>
+                    </div>
+                    <div style="margin-bottom: 15px; font-size: 0.85em; color: #888;">
+                        <span style="color: #d4af37;">风格：</span>${scheme.style} | 
+                        <span style="color: #d4af37;">色调：</span>${scheme.color}
+                    </div>
+                    <div class="scheme-actions">
+                        <button class="btn btn-primary" onclick="showPrompt('${scheme.id}')">查看提示词</button>
+                        <button class="btn btn-secondary" onclick="toggleSelect('${scheme.id}')">${scheme.selected ? '取消' : '候选'}</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function showPrompt(id) {
+            const scheme = todaySchemes.find(s => s.id === id);
+            if (scheme) {
+                document.getElementById('modal-title').textContent = scheme.title;
+                document.getElementById('modal-body').innerHTML = `<div class="prompt-text">${scheme.fullContent}</div>`;
+                document.getElementById('prompt-modal').classList.add('active');
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('prompt-modal').classList.remove('active');
+        }
+        
+        function copyPrompt() {
+            const text = document.querySelector('.prompt-text').textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ 提示词已复制到剪贴板！');
+            });
+        }
+        
+        function toggleSelect(id) {
+            const scheme = todaySchemes.find(s => s.id === id);
+            if (scheme) {
+                todaySchemes.forEach(s => s.selected = false);
+                scheme.selected = !scheme.selected;
+                renderTodaySchemes();
+            }
+        }
+        
+        document.getElementById('prompt-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeModal();
+        });
+        
+        renderTodaySchemes();
+    </script>
+</body>
+</html>
